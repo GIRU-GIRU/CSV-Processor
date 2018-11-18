@@ -1,0 +1,11 @@
+c:\users\danie\source\repos\BradsCSVProcessor\BradsCSVProcessor\bin\Debug\netcoreapp2.0\BradsCSVProcessor.deps.json
+c:\users\danie\source\repos\BradsCSVProcessor\BradsCSVProcessor\bin\Debug\netcoreapp2.0\BradsCSVProcessor.runtimeconfig.json
+c:\users\danie\source\repos\BradsCSVProcessor\BradsCSVProcessor\bin\Debug\netcoreapp2.0\BradsCSVProcessor.runtimeconfig.dev.json
+c:\users\danie\source\repos\BradsCSVProcessor\BradsCSVProcessor\bin\Debug\netcoreapp2.0\BradsCSVProcessor.dll
+c:\users\danie\source\repos\BradsCSVProcessor\BradsCSVProcessor\bin\Debug\netcoreapp2.0\BradsCSVProcessor.pdb
+c:\users\danie\source\repos\BradsCSVProcessor\BradsCSVProcessor\obj\Debug\netcoreapp2.0\BradsCSVProcessor.csprojResolveAssemblyReference.cache
+c:\users\danie\source\repos\BradsCSVProcessor\BradsCSVProcessor\obj\Debug\netcoreapp2.0\BradsCSVProcessor.csproj.CoreCompileInputs.cache
+c:\users\danie\source\repos\BradsCSVProcessor\BradsCSVProcessor\obj\Debug\netcoreapp2.0\BradsCSVProcessor.AssemblyInfoInputs.cache
+c:\users\danie\source\repos\BradsCSVProcessor\BradsCSVProcessor\obj\Debug\netcoreapp2.0\BradsCSVProcessor.AssemblyInfo.cs
+c:\users\danie\source\repos\BradsCSVProcessor\BradsCSVProcessor\obj\Debug\netcoreapp2.0\BradsCSVProcessor.dll
+c:\users\danie\source\repos\BradsCSVProcessor\BradsCSVProcessor\obj\Debug\netcoreapp2.0\BradsCSVProcessor.pdb
