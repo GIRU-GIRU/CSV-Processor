@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
+using System.Text;
 using System.Threading;
+using System.Xml;
 using Microsoft.VisualBasic.CompilerServices;
 
 namespace BradsCSVProcessor
 {
     class Program
     {
-        public static List<String> csvRows;
         public static string[] filePaths;
         static void Main(string[] args)
-        {
+        {     
             Flavour.ConfigureConsole();
             CSVProcessor.CheckOrCreateOutputDirectory();
 
@@ -24,41 +26,57 @@ namespace BradsCSVProcessor
             Console.WriteLine("\n \n   Enter file path \n");
             var folderLocation = Console.ReadLine();
             Console.WriteLine("Starting .. \n");
-            try
-            {
-               filePaths = Directory.GetFiles(folderLocation, "*.txt",
-                                    SearchOption.TopDirectoryOnly);
-            }
-            catch (Exception ex)
-            {
-                Console.Clear();
-                Console.WriteLine("Something's gone wrong.. \n \n" + ex.Message);
-                Console.WriteLine("Press any key to exit");
-                Console.ReadKey();
-                Environment.Exit(0);
-            }
+            Thread.Sleep(300);
 
-            int i = 0;
-            foreach (var file in filePaths)
-            {               
+            bool pathInvalid = true;
+            while (pathInvalid)
+            {
                 try
                 {
-                    csvRows = CSVProcessor.ProcessCSVFile(File.ReadAllText(file));
-                    Console.WriteLine($"Processed {file}");
-                    CSVProcessor.StoreCSV(file, csvRows);
-                    Console.WriteLine($"Stored {Path.GetFileName(file)} \n");
+                    filePaths = Directory.GetFiles(folderLocation, "*.csv",
+                        SearchOption.TopDirectoryOnly);
+                    pathInvalid = false;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error converting {file}: " + ex.Message);
-                    throw;
+                    Console.Clear();
+                    Console.WriteLine("Uhm..");
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadKey();
+                    Console.Clear();
+                    Console.WriteLine("\n \n   Enter file path \n");
+                    folderLocation = Console.ReadLine();
+                    Console.WriteLine("Starting .. \n");
                 }
-                i++;
             }
 
-            Console.WriteLine($"\n\nProcessed {i} documents successfully ! :)");
+            int csvProcessedCount = 0;
+            foreach (var filePath in filePaths)
+            {
+                try
+                {
+                    csvProcessedCount += CSVProcessor.RunCSVProcessing(filePath);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Error occured processing {filePath}!!:" + e.Message);
+                    Console.WriteLine("Continuing");
+                    continue;
+                }             
+            }
+
+            Console.WriteLine($"\n\nProcessed {csvProcessedCount} documents successfully ! :)");
             Console.WriteLine("Files will be in your output folder");
+            var dir = Environment.CurrentDirectory + "\\output";
+            
+            Process.Start("explorer.exe", $"/open, {dir}");
             Console.ReadKey();
+            Console.WriteLine();
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
+
         }
     }
 }

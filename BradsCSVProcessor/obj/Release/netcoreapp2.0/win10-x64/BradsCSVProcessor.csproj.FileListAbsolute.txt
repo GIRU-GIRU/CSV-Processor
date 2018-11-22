@@ -1,0 +1,14 @@
+C:\Users\dyacoubian\Documents\Brads CSV Processor\CSV-Processor-master\BradsCSVProcessor\bin\Release\netcoreapp2.0\win10-x64\hostpolicy.dll
+C:\Users\dyacoubian\Documents\Brads CSV Processor\CSV-Processor-master\BradsCSVProcessor\bin\Release\netcoreapp2.0\win10-x64\hostfxr.dll
+C:\Users\dyacoubian\Documents\Brads CSV Processor\CSV-Processor-master\BradsCSVProcessor\bin\Release\netcoreapp2.0\win10-x64\BradsCSVProcessor.exe
+C:\Users\dyacoubian\Documents\Brads CSV Processor\CSV-Processor-master\BradsCSVProcessor\bin\Release\netcoreapp2.0\win10-x64\BradsCSVProcessor.deps.json
+C:\Users\dyacoubian\Documents\Brads CSV Processor\CSV-Processor-master\BradsCSVProcessor\bin\Release\netcoreapp2.0\win10-x64\BradsCSVProcessor.runtimeconfig.json
+C:\Users\dyacoubian\Documents\Brads CSV Processor\CSV-Processor-master\BradsCSVProcessor\bin\Release\netcoreapp2.0\win10-x64\BradsCSVProcessor.runtimeconfig.dev.json
+C:\Users\dyacoubian\Documents\Brads CSV Processor\CSV-Processor-master\BradsCSVProcessor\bin\Release\netcoreapp2.0\win10-x64\BradsCSVProcessor.dll
+C:\Users\dyacoubian\Documents\Brads CSV Processor\CSV-Processor-master\BradsCSVProcessor\bin\Release\netcoreapp2.0\win10-x64\BradsCSVProcessor.pdb
+C:\Users\dyacoubian\Documents\Brads CSV Processor\CSV-Processor-master\BradsCSVProcessor\obj\Release\netcoreapp2.0\win10-x64\BradsCSVProcessor.csprojAssemblyReference.cache
+C:\Users\dyacoubian\Documents\Brads CSV Processor\CSV-Processor-master\BradsCSVProcessor\obj\Release\netcoreapp2.0\win10-x64\BradsCSVProcessor.csproj.CoreCompileInputs.cache
+C:\Users\dyacoubian\Documents\Brads CSV Processor\CSV-Processor-master\BradsCSVProcessor\obj\Release\netcoreapp2.0\win10-x64\BradsCSVProcessor.AssemblyInfoInputs.cache
+C:\Users\dyacoubian\Documents\Brads CSV Processor\CSV-Processor-master\BradsCSVProcessor\obj\Release\netcoreapp2.0\win10-x64\BradsCSVProcessor.AssemblyInfo.cs
+C:\Users\dyacoubian\Documents\Brads CSV Processor\CSV-Processor-master\BradsCSVProcessor\obj\Release\netcoreapp2.0\win10-x64\BradsCSVProcessor.dll
+C:\Users\dyacoubian\Documents\Brads CSV Processor\CSV-Processor-master\BradsCSVProcessor\obj\Release\netcoreapp2.0\win10-x64\BradsCSVProcessor.pdb

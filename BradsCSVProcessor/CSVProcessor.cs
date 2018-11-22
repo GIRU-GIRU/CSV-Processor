@@ -8,64 +8,78 @@ namespace BradsCSVProcessor
 {
     public static class CSVProcessor
     {
-        public static List<string> ProcessCSVFile(string fileString)
+        private static string ProcessCSVFile(string fileString)
         {
-            using (TextWriter log = new StreamWriter("log"))
+
+            List<string> finalList = new List<string>();
+
+            //find first row
+            var firstRowList = new List<int>();
+            for (int i = 0; i < 300; i++)
             {
-                log.WriteLine("------ begin file process -------");
-                var indexofCommaList = new List<int>();
-                for (int i = 0; i < fileString.Length; i++)
+                if (fileString[i] == ',')
                 {
-                    if (fileString[i] == ',')
-                    {
-                        indexofCommaList.Add(i);
-                    }
+                    firstRowList.Add(i);
                 }
-
-                int[] commaLocations = indexofCommaList.ToArray();
-                int firstRowLocation = commaLocations.Skip(3).FirstOrDefault();
-
-                var firstRow = fileString.Substring(0, firstRowLocation);
-                firstRow = "\"" + firstRow + "\"";
-
-                var restOfCSV = fileString;
-                var restOfCommaLocations = commaLocations.Skip(3).ToArray();
-                commaLocations = indexofCommaList.Skip(3).ToArray();
-
-                List<string> csvRows = new List<string>();
-                csvRows.Add(firstRow);
-
-
-                List<int> everyRow = new List<int>();
-                for (int i = 0; i < restOfCommaLocations.Length; i++)
-                {
-                    if (i % 14 == 0)
-                    {
-                        everyRow.Add(restOfCommaLocations[i]);
-                    }
-                }
-
-                log.WriteLine("rows are inbetween: " + string.Join(", ", everyRow));
-
-                int end = 1;
-                for (int start = 0; start < everyRow.Count; start++)
-                {
-                    if (end == everyRow.Count)
-                    {
-                        break;
-                    }
-                    var endSkipComma = everyRow[end] - (everyRow[start] - 1);
-                    var itemToAdd = "\"" + restOfCSV.Substring(everyRow[start] + 1, endSkipComma) + "\"";
-                    csvRows.Add(itemToAdd);
-                    log.WriteLine($"\n {itemToAdd}");
-                    end++;
-                }
-                log.WriteLine("------ end file process ------- \n \n \n");
-                return csvRows;
             }
+
+            var firstRowEnd = firstRowList.Skip(3).FirstOrDefault() + 1;
+            var firstRow = fileString.Substring(0, firstRowEnd);
+
+            finalList.Add(firstRow);
+            string fileStringWFR = fileString.Remove(0, firstRow.Length).Replace(" ", "");
+
+            //find all commas
+            int length = 0;
+            int commaCount = 0;
+            int startPoint = 0;
+            string startOfRow = "\"";
+            string endOfRow = "\"";
+            bool firstRowBool = true;
+            foreach (var letter in fileStringWFR)
+            {
+                length += +1;
+                if (letter == ',')
+                {
+                    commaCount += +1;
+                    if (IsFourtheenthComma(commaCount))
+                    {
+                        // logic to not add comma on the first row
+                        startOfRow = (firstRowBool) ? "\"" : ",\"";
+                        firstRowBool = false;
+                        var rowToAdd = fileStringWFR.Substring(startPoint, length - 1);
+
+                        fileStringWFR = fileStringWFR.Remove(startPoint, length);
+                        finalList.Add(startOfRow + rowToAdd + endOfRow);
+                        length = 0;
+                    }
+                }
+            }
+
+            int finalCommaChecker = 0;
+            foreach (var letter in fileStringWFR)
+            {
+                if (letter == ',')
+                {
+                    finalCommaChecker++;          
+                }
+            }
+            if (finalCommaChecker == 14)
+            {
+                finalList.Add(",\"" + fileStringWFR + "\"");
+            }
+            else
+            {
+                finalList.Add("," + fileStringWFR);
+            }
+            //var debug = string.Join("\n", finalList);    
+            return string.Join("", finalList);
         }
 
-
+        private static bool IsFourtheenthComma(int x)
+        {
+            return (x % 15) == 0;
+        }
 
         public static bool StoreCSV(string filePath, List<string> csvRows)
         {
@@ -87,9 +101,42 @@ namespace BradsCSVProcessor
 
                 return false;
             }
-
         }
 
+       
+        private static string fileLine;
+        public static int RunCSVProcessing(string filePath)
+        {
+            List<String> csvRows = new List<string>();
+            int counter = 1;
+            Console.Write($"Found {filePath} !");
+            try
+            {
+                Console.WriteLine();
+                Console.Write($"Processing ....");
+                MemoryStream fileMemory = new MemoryStream(Encoding.ASCII.GetBytes(File.ReadAllText(filePath)));
+                StreamReader fileStream = new StreamReader(fileMemory);
+                while ((fileLine = fileStream.ReadLine()) != null)
+                {
+                    counter++;
+                    if (counter % 50 == 0)
+                    {
+                        Console.Write(".");
+                    }
+                    csvRows.Add(CSVProcessor.ProcessCSVFile(fileLine));
+                }
+
+                Console.WriteLine($"Processed {filePath}");
+                StoreCSV(filePath, csvRows);
+                Console.WriteLine($"Stored {Path.GetFileName(filePath)} \n");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error converting {filePath}: " + ex.Message);
+                throw;
+            }
+            return 1;
+        }
         public static void CheckOrCreateOutputDirectory()
         {
             if (!Directory.Exists("output"))
@@ -107,6 +154,5 @@ namespace BradsCSVProcessor
                 }
             }
         }
-
     }
 }
